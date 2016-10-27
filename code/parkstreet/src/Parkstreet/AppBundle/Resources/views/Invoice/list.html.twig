@@ -1,0 +1,85 @@
+<div ng-controller="ListInvoiceController">
+    <h1>[[title]]</h1>
+    
+    {# Filter Invoices #}
+    <div class="panel panel-default">
+        <div class="panel-heading">Filter Invoices</div>
+        <div class="panel-body">        
+            <form name="invoice_filter_form" class="form-horizontal row" novalidate>
+                <div class="form-group">        
+                    <div class="col-lg-4">
+                        <label for="query_date" class="col-lg-5 control-label">Relative Date:</label>
+                        
+                        <div class="col-lg-7">
+                           <select name="query_date" ng-model="query_date" class="form-control">
+                                <option value="">Select</option>
+                                <option ng-repeat="date in dates" value="[[date.value]]">[[date.description]]</option>
+                           </select> 
+                        </div>                
+                    </div>
+            
+                    <div class="col-lg-4">
+                        <label for="query_client" class="col-lg-5 control-label">Client:</label>
+                        
+                        <div class="col-lg-7">
+                           <select name="query_client" ng-model="query_client" class="form-control" ng-change="invoice.loadProductsByClient()" required>
+                                <option value="">Select</option>
+                                <option ng-repeat="client in clients" value="[[client.id]]">[[client.name]]</option>
+                            </select> 
+                        </div>
+                    </div>
+                
+                    <div class="col-lg-4" ng-show="invoice_filter_form.query_client.$dirty && !(invoice_filter_form.query_client.$invalid)">
+                        <label for="query_product" class="col-lg-5 control-label">Product:</label>
+                        
+                        <div class="col-lg-7">
+                           <select name="query_product" ng-model="query_product" class="form-control">
+                                <option value="">Select</option>
+                                <option ng-repeat="product in products" value="[[product.id]]">[[product.description]]</option>
+                           </select> 
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {# Filter invoices close #}
+    
+    {# Invoices table #}
+    <table class="table table-striped table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>Invoice Num</th>
+                <th>Invoice Date</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total Price</th>
+                <th>Total Qty</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="invoice in invoices | filter: {client_id: query_client, product_id: query_product} | filterDate: query_date">
+                <td>[[invoice.invoice_num]]</td>
+                <td>[[invoice.invoice_date]]</td>
+                <td>[[invoice.product_description]]</td>
+                <td>[[invoice.qty]]</td>
+                <td>[[invoice.price]]</td>
+                <td>[[invoice.total_price]]</td>
+                <td>[[invoice.total_qty]]</td>
+            </tr>
+        </tbody>
+
+        {# Pagination invoices#}
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    {{ include("ParkstreetAppBundle:Common:pagination.html.twig") }}
+                </td>
+            </tr>
+        </tfoot>
+        {# Pagination invoices close#}
+    </table>
+    {# Invoices table close #}    
+</div>

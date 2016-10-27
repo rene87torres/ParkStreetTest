@@ -1,0 +1,30 @@
+services:
+    #date service
+    parkstreet_app.date:
+        class: Parkstreet\AppBundle\Useful\Date\Date
+        
+    #pagination service
+    parkstreet_app.pager:
+        class: Parkstreet\AppBundle\Useful\Pagination\Pager    
+        
+    #base service
+    parkstreet_app.base_service:
+        class: Parkstreet\AppBundle\FileManager\BaseManager
+        abstract: true
+        public: true
+        arguments: ['@doctrine.orm.default_entity_manager', '@security.token_storage']
+
+    #product service
+    parkstreet_app.product:
+        class: Parkstreet\AppBundle\FileManager\ProductManager
+        parent: parkstreet_app.base_service
+
+    #invoice service
+    parkstreet_app.invoice:
+        class: Parkstreet\AppBundle\FileManager\InvoiceManager
+        parent: parkstreet_app.base_service
+
+    #client service
+    parkstreet_app.client:
+        class: Parkstreet\AppBundle\FileManager\ClientManager
+        parent: parkstreet_app.base_service

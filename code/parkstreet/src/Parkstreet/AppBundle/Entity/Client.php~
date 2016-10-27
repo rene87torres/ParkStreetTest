@@ -1,0 +1,164 @@
+<?php
+
+namespace Parkstreet\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Client
+ *
+ * @ORM\Table(name="Clients")
+ * @ORM\Entity(repositoryClass="Parkstreet\AppBundle\Entity\Repository\ClientRepository")
+ */
+class Client
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_id", type="string", length=36, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client_name", type="string", length=200, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $name;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Parkstreet\AppBundle\Entity\Product", mappedBy="client")
+     */
+    private $products;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Parkstreet\AppBundle\Entity\Invoice", mappedBy="client")
+     */
+    private $invoices;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->invoices = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * Set id
+     *
+     * @param string $id
+     * @return Client
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get id
+     *
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Client
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Parkstreet\AppBundle\Entity\Product $products
+     * @return Client
+     */
+    public function addProduct(\Parkstreet\AppBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Parkstreet\AppBundle\Entity\Product $products
+     */
+    public function removeProduct(\Parkstreet\AppBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add invoices
+     *
+     * @param \Parkstreet\AppBundle\Entity\Invoice $invoices
+     * @return Client
+     */
+    public function addInvoice(\Parkstreet\AppBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices[] = $invoices;
+
+        return $this;
+    }
+
+    /**
+     * Remove invoices
+     *
+     * @param \Parkstreet\AppBundle\Entity\Invoice $invoices
+     */
+    public function removeInvoice(\Parkstreet\AppBundle\Entity\Invoice $invoices)
+    {
+        $this->invoices->removeElement($invoices);
+    }
+
+    /**
+     * Get invoices
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
+}

@@ -1,0 +1,13 @@
+/**
+ * Author: Rene Torres
+ */
+
+invoiceApp.controller('ListInvoiceController', function($scope, $http, $url) {
+    $scope.message = "Welcome test";
+    
+    $http
+	.get($url.generate('list_invoices'))
+	.success(function(response) {
+	    console.info(response);
+    	});	
+});

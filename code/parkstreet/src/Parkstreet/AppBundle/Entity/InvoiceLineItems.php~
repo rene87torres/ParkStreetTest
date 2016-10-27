@@ -1,0 +1,50 @@
+<?php
+
+namespace Parkstreet\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InvoiceLineItems
+ *
+ * @ORM\Table(name="InvoiceLineItems")
+ * @ORM\Entity(repositoryClass="Parkstreet\AppBundle\Entity\Repository\InvoiceLineItemsRepository")
+ */
+class InvoiceLineItems
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="qty", type="decimal", precision=0, scale=2, nullable=false, unique=false)
+     */
+    private $qty;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="decimal", precision=0, scale=2, nullable=false, unique=false)
+     */
+    private $price;
+
+    /**
+     * @var \Parkstreet\AppBundle\Entity\Invoice
+     *
+     * @ORM\ManyToOne(targetEntity="Parkstreet\AppBundle\Entity\Invoice")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="invoice_num", referencedColumnName="invoice_num", nullable=true)
+     * })
+     */
+    private $invoice;
+
+    /**
+     * @var \Parkstreet\AppBundle\Entity\Product
+     *
+     * @ORM\ManyToOne(targetEntity="Parkstreet\AppBundle\Entity\Product")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_id", referencedColumnName="product_id", nullable=true)
+     * })
+     */
+    private $product;
+
+
+}

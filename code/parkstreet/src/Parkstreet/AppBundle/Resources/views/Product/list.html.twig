@@ -1,0 +1,25 @@
+<div ng-controller="ListProductController">
+    <h1>[[title]]</h1>
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Product Num</th>
+                <th>Product</th>
+                <th>Client</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="product in products">
+                <td>[[product.product_id]]</td>
+                <td>[[product.product_description]]</td>
+                <td>[[product.client_name]]</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>

@@ -1,0 +1,31 @@
+a- 
+    function orderByKey($array) {        
+        ksort($array);
+        
+        return $array;
+    }
+
+    function orderByKeyReturnWithoutKeyRelation($array) {        
+        $arrayOrdered = $this->orderByKey($array);
+        $response[] = array_values($arrayOrdered);
+        $response[] = array_values($array);
+         
+         return $response;
+    }    
+
+b- The strpos function returns the position of the first occurrence of $someValue in $someString. The mistake in the expression is that in the case of the position of the first occurrence is 0, by converting to a boolean, the condition enters.
+
+c- advantages
+	- the class can be extended, and in that way we can reuse the get and set methods that provides for storing information.
+   disadvantages
+	- the main disadvantage is that I would implement the setProperty in a way that the information will be storaged in a array form, to manage the polymorphic information and have access through the getProperty method using a key. I would disaggregate this class in three: one would be SomeClassInterface with the getProperty($key) and setProperty($key, $value) methods, another class namaed SomeClassParent with $property and the constructor to inicicialize the property, living the only responsability to SomeClass of implements the setProperty and getProperty, in a way taht we could inject the interface SomeClassInterface to any other class you need to use these methods without worrying where the information comes from. We only be interested in this interface, which it has to contain the method to give back the information, following the principle of inversion of control. This would allow decouple our components to be better tested and maintained in the code.
+
+
+d- The ParkstreetTrait traid allows to combine class members without using inheritance. When we combine that with Aclass wich implements the ParstreetInterface interface which requires Aclass to implement the method run($a, $b), we would get run($a) of ParkstreetTrait, wich is missing the parameter $b and that makes a different function, which requires implement the interface.
+
+
+e- In the test code, I added a new layer between the controller layer and the model. The name of this layer in "File_Manager". With this I'll be avoiding de use of calls from the controller layer directly to the data access layer, and make more legible, clean and organized the code, delegating the only function of get the data from the view and send them onece received from "File_Manager" to the controller layer, making the code easier to maintain and test.
+
+
+
+

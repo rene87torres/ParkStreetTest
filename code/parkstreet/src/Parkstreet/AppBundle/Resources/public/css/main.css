@@ -1,0 +1,46 @@
+/**
+ * Author: Rene Torres
+ */
+
+h1 {
+   font-size: 20px;
+   margin-top: 0 !important;
+   padding-top: 0 !important;
+}
+
+ul.pagination {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+div.pagination-info {
+    margin-top: 5px;
+    text-align: right;
+}
+
+label.control-label {
+    width:auto !important;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.navbar .container {
+    margin-top: 10px;
+}
+
+.navbar .container a {
+    font-weight: bold;
+    font-size: 14px;
+}

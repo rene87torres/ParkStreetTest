@@ -1,0 +1,31 @@
+/**
+ * Author: Rene Torres
+ */
+
+//Init invoiceApp
+var invoiceApp = angular.module('invoiceApp', ['ngRoute'], resolveConflicts);
+
+//Resolving conflicts between Angular and tweet
+function resolveConflicts($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+}
+
+//Create factory to route
+invoiceApp.factory('$url', function () {
+    return {
+        generate: function (url, params, absolute) {
+            return Routing.generate(url, params, absolute);
+        }
+    };
+});
+
+//Init routing
+invoiceApp.config(['$routeProvider, $url', function ($routeProvider, $url) {
+    $routeProvider
+        .when('/', {
+	    templateUrl: $url.generate('dispatch_template', {template: "Invoice:list.html.twig"}),	
+            //templateUrl: Routing.generate('dispatch_template', {template: "Invoice:list.html.twig"}),
+            controller: 'ListInvoiceController'
+        });
+}]);

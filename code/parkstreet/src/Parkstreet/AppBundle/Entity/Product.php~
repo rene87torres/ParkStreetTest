@@ -1,0 +1,70 @@
+<?php
+
+namespace Parkstreet\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="Products")
+ * @ORM\Entity(repositoryClass="Parkstreet\AppBundle\Entity\Repository\ProductRepository")
+ */
+class Product
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="product_id", type="string", length=70, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="product_description", type="string", length=252, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $description;
+
+    /**
+     * @var \Parkstreet\AppBundle\Entity\Client
+     *
+     * @ORM\ManyToOne(targetEntity="Parkstreet\AppBundle\Entity\Client", inversedBy="products")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client_id", referencedColumnName="client_id", nullable=true)
+     * })
+     */
+    private $client;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Parkstreet\AppBundle\Entity\Invoice", inversedBy="products")
+     * @ORM\JoinTable(name="InvoiceLineItems",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="product_id", referencedColumnName="product_id", nullable=true)
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="invoice_num", referencedColumnName="invoice_num", nullable=true)
+     *   }
+     * )
+     */
+    private $invoices;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Parkstreet\AppBundle\Entity\InvoiceLineItems", mappedBy="product")
+     */
+    private $invoiceLineItems;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->invoices = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->invoiceLineItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

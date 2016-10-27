@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{#include Bootstrap#}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/parkstreetapp/css/bootstrap-3.3.7.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/parkstreetapp/css/main.css') }}" />
+    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />#}
+{% endblock %}
+
+{#define the title#}
+{% block title %}Welcome to invoice system test{% endblock %}
+
+{#define meta content#}
+{% block meta_content %}
+    <meta name="description" content="Invoice system test" />
+    <meta name="keywords" content="Invoice, system, test" />
+    <meta name="abstract" content="Invoice system test" />
+{% endblock %}
+
+{#include header#}
+{% block header %}
+    {{ include("ParkstreetAppBundle:Common:header.html.twig") }}
+{% endblock %}
+
+{#include footer#}
+{% block footer %}
+    {{ include("ParkstreetAppBundle:Common:footer.html.twig") }}
+{% endblock %}
+
+{#include AngularJs#}
+{% block javascripts %}
+    <script src="{{ asset('bundles/parkstreetapp/js/angular-1.2.15.min.js') }}"></script>
+    <script src="{{ asset('bundles/parkstreetapp/js/angular-route-1.2.25.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/parkstreetapp/js/main.js') }}"></script>
+    <script src="{{ asset('bundles/parkstreetapp/js/invoice.js') }}"></script>
+    <script src="{{ asset('bundles/parkstreetapp/js/client.js') }}"></script>
+    <script src="{{ asset('bundles/parkstreetapp/js/product.js') }}"></script>
+
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>#}
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>#}    
+{% endblock %}
