@@ -6,7 +6,7 @@
 namespace Parkstreet\AppBundle\FileManager;
 
 use Parkstreet\AppBundle\FileManager\Interfaces\InvoiceManagerInterface;
-use Parkstreet\AppBundle\Entity\Client;
+use Parkstreet\AppBundle\Entity\Invoice;
 
 /**
  * Class InvoiceManager
